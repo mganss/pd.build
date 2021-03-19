@@ -48,7 +48,7 @@ function(add_pd_external PROJECT_NAME EXTERNAL_NAME EXTERNAL_SOURCES)
 	endif()
 
 	# Adds
-	if(WIN32)
+	if(WIN32 AND MSVC)
 		if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
 			set_property(TARGET ${PROJECT_NAME} APPEND_STRING PROPERTY COMPILE_FLAGS " /DPD_LONGINTTYPE=\"long long\"")
 		endif()
@@ -66,7 +66,7 @@ function(add_pd_external PROJECT_NAME EXTERNAL_NAME EXTERNAL_SOURCES)
 	endif()
 
 	# Generate the function to export for Windows
-	if(${WIN32})
+	if(${WIN32} AND MSVC)
 		if(NAME_HAS_DOT EQUAL -1)
 			string(REPLACE "~" "_tilde" EXPORT_FUNCTION "${EXTERNAL_NAME}_setup")
 		else()
